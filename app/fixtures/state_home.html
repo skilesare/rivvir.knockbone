@@ -1,0 +1,20 @@
+<!--ko if: state() === 'home' -->
+
+<div class="container" data-bind="fadeOutIn:true">   
+    
+    <div class="row">
+        <form data-bind="submit: listItemHelper.addItem.bind($root)">
+            <input type="text" data-bind="value:listEntry"/><input type="submit" value="Add" />
+        </form>
+        <!-- ko foreach: activeList() -->
+        <span data-bind="text: text, css: { 'strikethrough': $data.bComplete() }"></span>
+        &nbsp;
+        <button data-bind="    click: $root.listItemHelper.switchComplete.bind($root.listItemHelper, $data), text: $data.switchText()"></button><br/>
+        <!-- /ko -->
+    </div>
+    
+</div>
+
+
+<!-- /ko -->
+

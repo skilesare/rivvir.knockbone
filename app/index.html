@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Knockbone list</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="fragment" content="!">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/app.css" rel="stylesheet" type="text/css" />
+    <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
+
+     <script src="script/reqs/jquery-2.1.0.min.js" type="text/javascript"></script>
+    <script src="script/reqs/bootstrap.min.js" type="text/javascript"></script>
+    <script src="script/reqs/knockout-3.0.0.js" type="text/javascript"></script>
+    <script src="script/reqs/underscore-min.js" type="text/javascript"></script>
+
+     <script src="script/reqs/backbone-min.js" type="text/javascript"></script>
+     <script src="script/reqs/lazy.js" type="text/javascript"></script>
+     <script src="script/reqs/holder.js" type="text/javascript"></script>
+     <script src="script/reqs/store.js" type="text/javascript"></script>
+     <script src="script/reqs/async.js" type="text/javascript"></script>
+     <script src="script/reqs/moment.min.js" type="text/javascript"></script>
+     <script src="script/reqs/bootstrap-datepicker.js" type="text/javascript"></script>
+     <script src="https://checkout.stripe.com/checkout.js"></script>
+     
+     <!--AndroidInclude-->
+    <!--iOSInclude-->
+
+
+    <script src="script/app.min.js" type="text/javascript"></script>
+    
+
+</head>
+<body>
+
+
+
+     <div class="loading" style="width:100%;">
+        <img src="images/loading.gif" class="loading">
+        <a href="#!home" class="retry" style="display:none;">Retry</a>
+     </div>
+
+    <!-- Part 1: Wrap all page content here -->
+
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+          <a  class='navbar-brand' href="#!">Knockbone list</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#!hello" data-bind="css:{'active': state() == 'hello'}">Say Hello</a></li>
+                <li><a href="#!home/grocery" data-bind="css: { 'active': state() == 'home' && activeListID() == 'grocery' }">Grocery</a></li>
+                <li><a href="#!home/work" data-bind="css: { 'active': state() == 'home' && activeListID() == 'work' }">Work</a></li>
+                <li><a href="#!home/home" data-bind="css: { 'active': state() == 'home' && activeListID() == 'home' }">Home</a></li>
+            </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="wrap">
+      <!-- Begin page content -->
+       <div class="container">
+            <div id="__fixtures"></div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            ourVM = null;
+            kickOff = function () {
+                window.kbVM = new window.kb.KBVM($('body').first());
+                ourVM = window.kbVM;
+                ourVM.initApp();
+            }
+            document.addEventListener("deviceready", function () {
+                kickOff();
+            });
+
+            setTimeout(function () {
+                if (ourVM === null) {
+                    kickOff();
+                }
+            }
+            , 2500);
+
+            $('.nav a').on('click touchstart', function(){
+                if($('.navbar-toggle').css('display') !='none'){
+                    setTimeout( function(){
+                    $(".navbar-toggle").trigger( "click" );
+                  }, 400);
+                }
+            });
+
+
+        }
+
+);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "name": "knockbone",
+  "description": "knockbone",
+  "version": "0.0.1",
+  "author": {
+    "name": "Austin Fatheree",
+    "email": "austin@ignitedev.com"
+  },
+  "private": true,
+  "homepage": "http://ignitedev.com",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "contributors": [],
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-cli": "latest",
+    "coffee-script": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-csslint": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-coffee": "latest",
+    "grunt-coffeelint": "latest",
+    "grunt-exec": "latest",
+    "grunt-karma": "latest",
+    "shelljs": "latest",
+    "request": "~2.33.0",
+    "async": "~0.2.9",
+    "lodash": "~2.4.1",
+    "moment-timezone": "0.0.3",
+    "grunt-contrib-uglify": "~0.3.2",
+    "http-proxy": "~1.0.2",
+	"connect": "~2.12.0"
+  },
+  "dependencies": {
+
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+}

@@ -55,6 +55,8 @@ class Navigation extends Backbone.Router
           new ListItem(o)
         @viewModel.activeList(loadedItems)
         @showPage "home"
+      , =>
+        @showPage "home"
 
 
   

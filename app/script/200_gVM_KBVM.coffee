@@ -30,10 +30,11 @@ class KBVM
     @isTestacular = false
     @isInit = ko.observable(false)
     @utils = new Utils(@)
-    @navigation = new Navigation(@)
+    
     @navState = ko.observable()
     
     @activeListID = ko.observable("home")
+    @navigation = new Navigation(@)
     @listItemHelper = new ListItemHelper(@)
     @listEntry = ko.observable("Enter a new Item") # holds the item value to be added
     @activeList = ko.observable([])

@@ -44,9 +44,9 @@ https://www.gnu.org/copyleft/gpl.html
       this.isTestacular = false;
       this.isInit = ko.observable(false);
       this.utils = new Utils(this);
-      this.navigation = new Navigation(this);
       this.navState = ko.observable();
       this.activeListID = ko.observable("home");
+      this.navigation = new Navigation(this);
       this.listItemHelper = new ListItemHelper(this);
       this.listEntry = ko.observable("Enter a new Item");
       this.activeList = ko.observable([]);
@@ -195,22 +195,22 @@ https://www.gnu.org/copyleft/gpl.html
       this.listItemID = ko.observable(null);
       if (options != null) {
         if (options.text != null) {
-          this.text = ko.observable(options.text);
+          this.text(options.text);
         }
         if (options.dateAdded != null) {
-          this.dateAdded = ko.observable(options.dateAdded);
+          this.dateAdded(options.dateAdded);
         }
         if (options.dateComplete != null) {
-          this.dateComplete = ko.observable(options.dateComplete);
+          this.dateComplete(options.dateComplete);
         }
         if (options.bComplete != null) {
-          this.bComplete = ko.observable(options.bComplete);
+          this.bComplete(options.bComplete);
         }
         if (options.listID != null) {
-          this.listID = ko.observable(options.listID);
+          this.listID(options.listID);
         }
         if (options.listItemID != null) {
-          this.listItemID = ko.observable(options.listItemID);
+          this.listItemID(options.listItemID);
         }
       }
       this.switchText = ko.computed((function(_this) {
@@ -322,6 +322,8 @@ https://www.gnu.org/copyleft/gpl.html
             });
             _this.viewModel.activeList(loadedItems);
             return _this.showPage("home");
+          }, function() {
+            return _this.showPage("home");
           });
         };
       })(this));
@@ -391,7 +393,7 @@ https://www.gnu.org/copyleft/gpl.html
     }
 
     ListItemHelper.prototype.addItem = function() {
-      var newItem;
+      var newItem, updatedList;
       newItem = {
         listID: this.viewModel.activeListID(),
         listItemID: window.guidGenerator(),
@@ -400,14 +402,10 @@ https://www.gnu.org/copyleft/gpl.html
         bComplete: false,
         text: this.viewModel.listEntry()
       };
-      return this.save(newItem, (function(_this) {
-        return function() {
-          var updatedList;
-          updatedList = _this.viewModel.activeList();
-          updatedList.push(new ListItem(newItem));
-          return _this.viewModel.activeList(updatedList);
-        };
-      })(this), (function(_this) {
+      updatedList = this.viewModel.activeList();
+      updatedList.push(new ListItem(newItem));
+      this.viewModel.activeList(updatedList);
+      return this.save(newItem, null, (function(_this) {
         return function() {
           return _this.viewModel.errorMessage('Opps. Service Failed.');
         };

@@ -10,12 +10,10 @@ class ListItemHelper
       dateComplete: null
       bComplete: false
       text: @viewModel.listEntry()
-      
-    @save newItem, =>
-      updatedList = @viewModel.activeList()
-      updatedList.push(new ListItem(newItem))
-      @viewModel.activeList(updatedList)
-    , () =>
+    updatedList = @viewModel.activeList()
+    updatedList.push(new ListItem(newItem))
+    @viewModel.activeList(updatedList)
+    @save newItem, null, () =>
       @viewModel.errorMessage('Opps. Service Failed.')
   switchComplete: (data) =>
     data.bComplete(if data.bComplete() then false else true)

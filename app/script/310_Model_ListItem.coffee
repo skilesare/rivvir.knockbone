@@ -8,12 +8,12 @@ class ListItem
     @listID =  ko.observable(null)
     @listItemID = ko.observable(null)
     if options?
-      @text = ko.observable(options.text) if options.text?
-      @dateAdded = ko.observable(options.dateAdded) if options.dateAdded?
-      @dateComplete =  ko.observable(options.dateComplete) if options.dateComplete?
-      @bComplete =  ko.observable(options.bComplete) if options.bComplete?
-      @listID =  ko.observable(options.listID) if options.listID?
-      @listItemID = ko.observable(options.listItemID) if options.listItemID?
+      @text options.text if options.text?
+      @dateAdded options.dateAdded if options.dateAdded?
+      @dateComplete options.dateComplete if options.dateComplete?
+      @bComplete options.bComplete if options.bComplete?
+      @listID options.listID if options.listID?
+      @listItemID  options.listItemID if options.listItemID?
     @switchText = ko.computed =>
       if @bComplete()
         "Undo Complete"

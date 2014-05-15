@@ -19,13 +19,13 @@ https://www.gnu.org/copyleft/gpl.html
         window.constants = {};
       }
       window.constants.netEnv = "debug";
-      window.constants.serviceURL = 'http://localhost:56136';
+      window.constants.serviceURL = 'http://localhost:50049';
       if (window.location.protocol === 'file:' || window.location.origin.indexOf('localhost') > -1) {
         if (window.constants.netEnv === 'debug') {
-          window.constants.BaseURL = "http://localhost:56136";
+          window.constants.BaseURL = "http://localhost:50049";
         }
         if (window.constants.netEnv === 'production') {
-          window.constants.BaseURL = "http://localhost:56136";
+          window.constants.BaseURL = "http://localhost:50049";
         }
       } else {
         if (window.location.origin) {

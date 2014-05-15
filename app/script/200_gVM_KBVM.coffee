@@ -7,14 +7,14 @@ class KBVM
     $this = @
     window.constants = {} if not window.constants?
     window.constants.netEnv = "debug"
-    window.constants.serviceURL = 'http://localhost:56136'
+    window.constants.serviceURL = 'http://localhost:50049'
     
     if window.location.protocol is 'file:' or window.location.origin.indexOf('localhost') > -1
       
-      #window.constants.serviceURL = "http://localhost:56136"
-      window.constants.BaseURL = "http://localhost:56136" if window.constants.netEnv is 'debug'
+      #window.constants.serviceURL = "http://localhost:50049"
+      window.constants.BaseURL = "http://localhost:50049" if window.constants.netEnv is 'debug'
       
-      window.constants.BaseURL = "http://localhost:56136" if window.constants.netEnv is 'production'
+      window.constants.BaseURL = "http://localhost:50049" if window.constants.netEnv is 'production'
     else
       if window.location.origin
         window.constants.BaseURL = window.location.origin

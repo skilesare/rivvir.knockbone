@@ -20,6 +20,8 @@ We were inspired by the knockback project to take a look at ways we could augmen
 We believe this framework is much clearer in what it is trying to achieve.  You aren't and shouldn't write a module system with it, but if you are writing an app with a substantial but limited amount of functionality (5-25 'screens'), this framework will make things much easier on you and any one you hire down the road and you won't have to learn all of Angular or Ember to get started.
 
 ## Building ##
+You will need to run npm install in the repo directory.
+
 Running the watch.bat will start up watch.  On mac you can just run grunt watch.  This will rebuild your app each time you save a .coffee file.
 
 ### Why CoffeeScript? ###
@@ -37,15 +39,18 @@ We are just saving data into Session in this project and we'd be more than happy
 We aren't artists and bootstrap is easy.  It isn't a dependency so feel free to use your own look and feel.
 
 ## Running ##
-Open the project in Visual Studio.  Run it.  Navigate to localhost:XXXX/app/index_base.html.  Make lists.
+Open the project in Visual Studio.  Run it.  Navigate to localhost:50049/app/index_base.html.  Make lists.
 
-You can also run 'node app/server.js' to start an server on port 557.  The service won't run for persistence but the app should work.
+You can also run 'node app/server.js' to start an server on port 557(if you don't use localhost you may get a CORS error).  The service won't run for persistence but the app should work.
 
 ## What is What ##
 
 app/index_base.html - This file is the 'shell' of your app. The `<div id="__fixtures"></div>` tag is where your 'fixtures' will be loaded when your application reaches the required state.
 
 ### fixtures ###
+- `state_home.html`
+- `state_hello.html`
+
 You can think of fixtures as 'pages'.  If you want a new page, create a fixture for it.  It is just html code with knockout binding.
 
     <!--ko if: state() === 'hello' -->
@@ -69,6 +74,9 @@ In the above our fixture will wait until the hello state is reached and then sho
 All the script/#.coffee files are combined and then compiled into app.js.  Grunt does this.  The numbers at the front of each file are just for listing priority and the types of files in the prefix are just for clarity.  Feel free to use your own convention.
 
 #### gVM ####
+
+- `200_gVM_KBVM.coffee`
+
 The gVM is the Global View Model.  This IS your app.  Everything goes in here.  The framework will bind this object to the body via knock out.  This object is the $root in your fixture knockout bindings.  You will want to reference each of your other classes in here.  So you will see something like this in the constructor:
 
     @navigation = new Navigation(@)
@@ -76,7 +84,11 @@ The gVM is the Global View Model.  This IS your app.  Everything goes in here.  
 
 We are just instantiating our other classes and passing our ViewModel to this. **But you aren't using Inversion of Control or Dependency Injection. Heresy!!**  I'm sorry you feel that way.  If you application becomes so unwieldy that you can't reference all your views and helper classes from the global scope you may be building an application that is too big for this framework.  We've never run into a problem.  We have considered waiting until a view is instantiated to create the object but it hasn't been necessary yet.  Again, we take pull requests.
 
+initApp() is called when the page has all the code loaded.  We do a number of things in here and then when our gVM is ready, we do the knockout binding to the body.  In the Async statement you may want to do things like load your user's data from a server, load look up tables, etc.  You can do these in series or parallel...just do them before you ko.bind().
+
 #### Models and Observable ####
+
+- `300_Model_LineItem.coffee`
 
 A necessary evil of Knockout is the observable object.  Ember has gets and sets and Angular has the requirement of executing changes to your pojos in 'context'.  We wanted angular to solve the observable problem, but we found that we kept ending up out of context and having to cast ourselves back into context.  With knockout's observable we are forced to make ourselves get and set properly.
 
@@ -104,6 +116,9 @@ A necessary evil of Knockout is the observable object.  Ember has gets and sets 
       , @
 
 #### Navigation ####
+
+- `400_helper_Navigation.coffee`
+
 This is where the backbone.router comes in.  The navigation class runs most of the app.  It lets us SPAify our app.  When you add a page you need to add the route to the Navigation script and the function to prepare and activate that state:
 
     routes :
@@ -126,6 +141,16 @@ Below we will ensure our app is set up(always do this), get some data we need, s
           new ListItem(o)
         @viewModel.activeList(loadedItems)
         @showPage "home"
+
+#### Helpers ####
+
+- `410_helper_LineItemHelper.coffee`
+
+Helpers are good place to put your code that loads data into your view model and save data back to the server.
+
+#### Views ####
+
+We don't have any 500_Views in the this project, but we have done this in other projects to further abstract away the data to be used in a fixture from the gvm.  When we do this we move the observables into the views and try to keep the observable out of the models and gVMs.
 
 ## Summary ##
 
